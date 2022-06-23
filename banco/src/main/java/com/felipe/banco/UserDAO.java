@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class UserDAO {
 
-    public static void connect(int opt, int idUser, String name) {
+    public static void connect(int opt, int idUser, String name, int  conta) {
         String dbInput;
         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:banco.db")) {
 
@@ -15,12 +15,12 @@ public class UserDAO {
             // criando uma tabela
             switch (opt) {
                 case 1:
-                    statement.execute("CREATE TABLE IF NOT EXISTS RC_TEST( ID INTEGER, NOME VARCHAR )");
+                    statement.execute("CREATE TABLE IF NOT EXISTS RC_TEST( ID INTEGER, NOME VARCHAR, CONTA VARCHAR  )");
 
                     break;
 
                 case 2:
-                    dbInput = String.format("INSERT INTO RC_TEST( ID, NOME) VALUES (%d, '%s')", idUser, name);
+                    dbInput = String.format("INSERT INTO RC_TEST( ID, NOME, CONTA) VALUES (%d, '%s', '%s')", idUser, name, conta);
                     // inserindo registros
                     statement.execute(dbInput);
 

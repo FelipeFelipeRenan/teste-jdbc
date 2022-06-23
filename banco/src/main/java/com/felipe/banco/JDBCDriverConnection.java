@@ -16,8 +16,8 @@ public class JDBCDriverConnection {
 
         Scanner sc = new Scanner(System.in);
         String opcao, nome = null;
-        int opt = 0, id = 0;
-        
+        int opt = 0, id = 0, conta = 0 ;
+
         do {
             System.out.println("------------------------------------------------");
             System.out.println("-----BDSM - Banco de Dados Simples Multiuso-----");
@@ -30,7 +30,7 @@ public class JDBCDriverConnection {
             opt = sc.nextInt();
             switch (opt) {
                 case 1:
-                    UserDAO.connect(1, id, nome);
+                    UserDAO.connect(1, id, nome, conta);
                     break;
                 case 2:
                     System.out.println("Adicionando na base de dados");
@@ -40,33 +40,43 @@ public class JDBCDriverConnection {
 
                     System.out.println("Entre com o nome: ");
                     nome = sc.nextLine();
-                    UserDAO.connect(2, id, nome);
-                  
+                    sc.nextLine();
+
+                    System.out.println("Entre com o numero da conta: ");
+                    conta = sc.nextInt();
+                    UserDAO.connect(2, id, nome, conta) ;
 
                     break;
                 case 3:
-                    UserDAO.connect(3, id, nome);
+                    UserDAO.connect(3, id, nome, conta);
                     break;
-                case 4:                   
+                case 4:
                     System.out.println("Excluindo da base de dados");
                     System.out.println("Entre com o ID: ");
                     id = sc.nextInt();
-                    UserDAO.connect(4,id,nome);
                     sc.nextLine();
+                    System.out.println("Entre com o numero da conta: ");
+                    conta = sc.nextInt();
                     
+                    UserDAO.connect(4, id, nome, conta);
+                    sc.nextLine();
+
                     break;
-                
+
                 case 5:
+
                     System.out.println("Modificando o registro");
                     System.out.println("Entre com o ID: ");
                     id = sc.nextInt();
                     sc.nextLine();
                     System.out.println("Entre com o nome");
                     nome = sc.nextLine();
-                    UserDAO.connect(5,id,nome);
                     sc.nextLine();
-
-
+                    System.out.println("Entre com o numero da conta: ");
+                    conta = sc.nextInt();
+                    sc.nextLine();
+                    UserDAO.connect(5, id, nome, conta);
+                    sc.nextLine();
 
                     break;
 
