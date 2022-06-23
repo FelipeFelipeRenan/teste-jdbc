@@ -15,12 +15,12 @@ public class UserDAO {
             // criando uma tabela
             switch (opt) {
                 case 1:
-                    statement.execute("CREATE TABLE IF NOT EXISTS RC_TEST( ID INTEGER, NOME VARCHAR, CONTA VARCHAR  )");
+                    statement.execute("CREATE TABLE IF NOT EXISTS BANK_DATA( ID INTEGER, NOME VARCHAR, CONTA VARCHAR  )");
 
                     break;
 
                 case 2:
-                    dbInput = String.format("INSERT INTO RC_TEST( ID, NOME, CONTA) VALUES (%d, '%s', '%s')", idUser, name, conta);
+                    dbInput = String.format("INSERT INTO BANK_DATA( ID, NOME, CONTA) VALUES (%d, '%s', '%s')", idUser, name, conta);
                     // inserindo registros
                     statement.execute(dbInput);
 
@@ -28,24 +28,25 @@ public class UserDAO {
 
                 case 3:
                     // lendo os registros
-                    PreparedStatement stmt = connection.prepareStatement("SELECT * FROM RC_TEST");
+                    PreparedStatement stmt = connection.prepareStatement("SELECT * FROM BANK_DATA");
                     ResultSet resultSet = stmt.executeQuery();
 
                     while (resultSet.next()) {
                         Integer id = resultSet.getInt("ID");
                         String nome = resultSet.getString("NOME");
+                        String account = resultSet.getString("CONTA");
 
-                        System.out.println(id + " - " + nome);
+                        System.out.println(id + " - " + nome + " - " + account);
                     }
                     break;
                 case 4:
-                    dbInput = String.format("DELETE FROM RC_TEST WHERE ID=%d", idUser);
+                    dbInput = String.format("DELETE FROM BANK_DATA WHERE ID=%d", idUser);
                     // inserindo registros
                     statement.execute(dbInput);
 
                     break;
                 case 5:
-                    dbInput = String.format("UPDATE RC_TEST SET NOME=%s WHERE ID=%d", name,idUser);
+                    dbInput = String.format("UPDATE BANK_DATA SET NOME=%s WHERE ID=%d", name,idUser);
                     break;
                 default:
                     System.out.println("Opção indisponivel!");
